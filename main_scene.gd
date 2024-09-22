@@ -3,9 +3,11 @@ extends Node2D
 # Preload the FallingObject scene
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn")
 
-# Preload the textures for random selection
-var bad_comment_1: Texture2D = preload("res://image/comments/bad/BadComment1.png")
-var bad_comment_2: Texture2D = preload("res://image/comments/bad/BadComment2.png")
+# Preload the textures and assign IDs
+var textures = {
+	"bc1": preload("res://image/comments/bad/BadComment1.png"),
+	"bc2": preload("res://image/comments/bad/BadComment2.png")
+}
 
 # Variables for spawning objects
 var spawn_timer: float = 2.0  # Time in seconds between each spawn
@@ -33,13 +35,18 @@ func spawn_object():
 	# Instantiate the falling object scene
 	var falling_object = falling_object_scene.instantiate()
 
-	# Randomly select one of the two textures
-	var random_texture = bad_comment_1 if randf() > 0.5 else bad_comment_2
+	# Randomly select one of the textures and its ID
+	var texture_id = "bc1" if randf() > 0.5 else "bc2"
+
+	var texture = textures[texture_id]
 
 	# Set the texture
-	var sprite = falling_object.get_node("Sprite2D")  
-	sprite.texture = random_texture
+	var sprite = falling_object.get_node("Sprite2D")
+	sprite.texture = texture
 	
+	# Store the texture ID in the falling object (using a custom property)
+	falling_object.set("texture_id", texture_id)
+
 	# Random X position for the object to spawn within the screen width
 	var random_x_position = randi() % int(screen_size.x)
 	
@@ -48,3 +55,7 @@ func spawn_object():
 	
 	# Add the object as a child of the main scene
 	add_child(falling_object)
+
+# Function to check the texture ID
+func check_texture_id(falling_object, id_to_check: String) -> bool:
+	return falling_object.get("texture_id") == id_to_check
