@@ -6,6 +6,9 @@ var is_grabbed: bool = false
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
 
+func _ready() -> void:
+	add_to_group("falling_objects")
+
 # Function to detect if the object is clicked
 func _input(event):
 	if event is InputEventMouseButton:
@@ -24,6 +27,10 @@ func is_point_in_body(point: Vector2) -> bool:
 		var rect = collision_shape.shape.get_rect()
 		return rect.has_point(point - global_position)
 	return false
+	
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("falling_objects"):
+		print("Collision detected with another falling object!")
 
 
 func _process(delta):
