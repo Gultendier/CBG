@@ -1,0 +1,47 @@
+[33mcommit b5041b1e7fc33f57cd93a13517b903fadaee1ae5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Tue Sep 24 20:17:54 2024 +0200
+
+    label position is now dynamic
+
+[33mcommit 838c67607757c1a0c0650c8ab88e3b88e504615b[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Tue Sep 24 19:52:47 2024 +0200
+
+    objects removed if equal and added scoreboard
+
+[33mcommit 0c8ce3044b0d54ab7fe877b1685d03d42f830cd4[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Sun Sep 22 19:21:44 2024 +0200
+
+    now also check for id
+
+[33mcommit 8635c3711d940e1490714fa0b088079b587639ad[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Sun Sep 22 19:12:58 2024 +0200
+
+    checks now if objects collide with each other
+
+[33mcommit 1d1ebb2a65dfd33a3fb72b6c6dc73a0775d3d339[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Sun Sep 22 18:02:37 2024 +0200
+
+    object now have a unique id
+
+[33mcommit 0d2f5799673c53c7f12867d5c543f684a010d68d[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Sun Sep 22 16:59:30 2024 +0200
+
+    the falling_objects get now a random image
+
+[33mcommit 1ee310e391c4a2121baa12fa0427887ea6446a2d[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Sun Sep 22 16:54:26 2024 +0200
+
+    added placeholder imagaes
+
+[33mcommit ecc13ae2eaf3e212d973367fc71e4fa2d1954b42[m
+Author: Lukasz <lukasz.szupka@student.fh-kiel.de>
+Date:   Sun Sep 22 15:25:10 2024 +0200
+
+    Spawning falling objects, they can be moved by drag and drop
