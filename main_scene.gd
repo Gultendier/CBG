@@ -19,7 +19,7 @@ var screen_size: Vector2
 func _ready():
 	# Get the screen size
 	screen_size = get_viewport_rect().size
-
+	print_tree()
 	
 	# Start spawning objects
 	spawn_object()
@@ -62,7 +62,7 @@ func spawn_object():
 
 func update_score_label():
 # Update the Label's text to reflect the global score
-	$Label.text = "Score: " + str(ScoreBoard.score)
+	$CanvasLayer/HBoxContainer/Label.text = "Score: " + str(ScoreBoard.score)
 
 # Function to check the texture ID
 func check_texture_id(falling_object, id_to_check: String) -> bool:
