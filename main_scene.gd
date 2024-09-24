@@ -19,6 +19,7 @@ var screen_size: Vector2
 func _ready():
 	# Get the screen size
 	screen_size = get_viewport_rect().size
+
 	
 	# Start spawning objects
 	spawn_object()
@@ -29,6 +30,9 @@ func _process(delta):
 	if spawn_timer <= 0:
 		spawn_object()
 		spawn_timer = spawn_interval  # Reset the timer
+		
+# Continuously update the label to display the current score
+	update_score_label()
 
 # Function to spawn a falling object
 func spawn_object():
@@ -55,6 +59,10 @@ func spawn_object():
 	
 	# Add the object as a child of the main scene
 	add_child(falling_object)
+
+func update_score_label():
+# Update the Label's text to reflect the global score
+	$Label.text = "Score: " + str(ScoreBoard.score)
 
 # Function to check the texture ID
 func check_texture_id(falling_object, id_to_check: String) -> bool:

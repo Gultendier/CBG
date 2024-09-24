@@ -1,11 +1,14 @@
 extends Area2D
 class_name FallingObject
+
 # Variables to handle the speed and state
 var falling_speed: float = 100.0  # Initial falling speed
 var is_grabbed: bool = false
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
 @export var texture_id: String = ""  # Exported variable for the texture ID
+var score_value = 2
+
 
 func _ready() -> void:
 	add_to_group("falling_objects")
@@ -28,14 +31,16 @@ func is_point_in_body(point: Vector2) -> bool:
 		var rect = collision_shape.shape.get_rect()
 		return rect.has_point(point - global_position)
 	return false
-	
+
 # Called when another body enters this area and checks for object ID
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("falling_objects"):
 		var other_object = area as FallingObject
 		if other_object.texture_id == texture_id:
 			print("Collision detected with another falling object of the same ID!")
-
+			# Update the global score when collision occurs
+			ScoreBoard.add_score(score_value)
+			queue_free()  # Remove the object after updating the score
 
 func _process(delta):
 	if is_grabbed:
