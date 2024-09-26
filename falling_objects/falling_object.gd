@@ -2,13 +2,12 @@ extends Area2D
 class_name FallingObject
 
 # Variables to handle the speed and state
-var falling_speed: float = 100.0  # Initial falling speed
+var falling_speed: float = 500.0  # Initial falling speed +100
 var is_grabbed: bool = false
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
 @export var texture_id: String = ""  # Exported variable for the texture ID
 var score_value = 2
-
 
 func _ready() -> void:
 	add_to_group("falling_objects")
@@ -53,3 +52,4 @@ func _process(delta):
 # Function to modify speed dynamically
 func set_falling_speed(new_speed: float):
 	falling_speed = new_speed
+		
