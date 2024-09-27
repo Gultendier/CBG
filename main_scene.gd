@@ -2,6 +2,7 @@ extends Node2D
 
 # Preload the FallingObject scene
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn")
+@onready var countdown_timer: Timer = $SpeedTimer
 
 # Preload the textures and assign IDs
 var textures = {
@@ -19,8 +20,6 @@ var screen_size: Vector2
 func _ready():
 	# Get the screen size
 	screen_size = get_viewport_rect().size
-	print_tree()
-	
 	# Start spawning objects
 	spawn_object()
 
@@ -67,3 +66,7 @@ func update_score_label():
 # Function to check the texture ID
 func check_texture_id(falling_object, id_to_check: String) -> bool:
 	return falling_object.get("texture_id") == id_to_check
+
+# Timer for the speed increase of falling_objects
+func _on_speed_timer_timeout() -> void:
+	GameProgress.increase_speed()

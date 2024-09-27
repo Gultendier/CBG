@@ -18,6 +18,7 @@ config/icon="res://image/icon.svg"
 [autoload]
 
 ScoreBoard="*res://score_board.gd"
+GameProgress="*res://game_progress.gd"
 
 [display]
 

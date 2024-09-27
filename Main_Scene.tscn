@@ -31,3 +31,9 @@ texture = ExtResource("2_nkv85")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="BackgroundTint/TextureRect"]
 color = Color(0, 0, 0, 0.184314)
+
+[node name="SpeedTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
