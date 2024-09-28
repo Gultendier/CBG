@@ -11,6 +11,8 @@ var score_value = 2
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn")
 @export var texture_id: String = ""  # Exported variable for the texture ID
 
+var sprite: Sprite2D # Sprite reference
+
 # Preload the textures and assign IDs
 var textures = {
 	"bc1": preload("res://image/comments/bad/BadComment1.png"),
@@ -19,8 +21,7 @@ var textures = {
 	"bc2_grabbed": preload("res://image/comments/bad/BadComment2_grabbed.png")
 }
 
-# Sprite reference
-var sprite: Sprite2D
+
 
 func _ready() -> void:
 	add_to_group("falling_objects")
@@ -36,11 +37,11 @@ func _ready() -> void:
 func _process(delta):
 	set_falling_speed(GameProgress.speed_increase)
 	if is_grabbed:
-		# Move the object while maintaining the offset
-		global_position = get_global_mouse_position() + grab_offset
+		global_position = get_global_mouse_position() + grab_offset # Move the object while maintaining the offset
+
 	else:
-		# Continue falling if not grabbed
-		global_position += fall_direction * falling_speed * delta
+		global_position += fall_direction * falling_speed * delta # Continue falling if not grabbed
+
 
 # Function to modify speed dynamically
 func set_falling_speed(new_speed: float):
@@ -54,12 +55,10 @@ func _input(event):
 			if event.pressed and is_point_in_body(mouse_position):
 				is_grabbed = true
 				grab_offset = global_position - mouse_position  # Store the offset
-				# Change texture to grabbed version
-				sprite.texture = textures[texture_id + "_grabbed"]
+				sprite.texture = textures[texture_id + "_grabbed"] # Change texture to grabbed version
 			elif not event.pressed and is_grabbed:
 				is_grabbed = false
-				# Revert texture to the original version
-				sprite.texture = textures[texture_id]
+				sprite.texture = textures[texture_id] # Revert texture to the original version
 
 # Function to check if the mouse is within the collision shape
 func is_point_in_body(point: Vector2) -> bool:
@@ -75,6 +74,5 @@ func _on_area_entered(area: Area2D) -> void:
 		var other_object = area as FallingObject
 		if other_object.texture_id == texture_id:
 			print("Collision detected with another falling object of the same ID!")
-			# Update the global score when collision occurs
-			ScoreBoard.add_score(score_value)
+			ScoreBoard.add_score(score_value) # Update the global score when collision occurs
 			queue_free()  # Remove the object after updating the score
