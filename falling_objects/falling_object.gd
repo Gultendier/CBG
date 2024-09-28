@@ -14,22 +14,24 @@ var score_value = 2
 # Preload the textures and assign IDs
 var textures = {
 	"bc1": preload("res://image/comments/bad/BadComment1.png"),
-	"bc2": preload("res://image/comments/bad/BadComment2.png")
+	"bc2": preload("res://image/comments/bad/BadComment2.png"),
+	"bc1_grabbed": preload("res://image/comments/bad/BadComment1_grabbed.png"),
+	"bc2_grabbed": preload("res://image/comments/bad/BadComment2_grabbed.png")
 }
+
+# Sprite reference
+var sprite: Sprite2D
 
 func _ready() -> void:
 	add_to_group("falling_objects")
-	# Randomly select one of the textures and its ID
-	var texture_id = "bc1" if randf() > 0.5 else "bc2"
-	var texture = textures[texture_id]
-	var falling_object = falling_object_scene.instantiate()
-
-	# Set the texture
-	var sprite = falling_object.get_node("Sprite2D")
-	sprite.texture = texture
 	
-	# Store the texture ID in the falling object (using a custom property)
-	falling_object.set("texture_id", texture_id)
+	# Randomly select one of the textures and its ID
+	texture_id = "bc1" if randf() > 0.5 else "bc2"
+	var texture = textures[texture_id]
+
+	# Get the sprite node and set the initial texture
+	sprite = get_node("Sprite2D")
+	sprite.texture = texture
 	
 func _process(delta):
 	set_falling_speed(GameProgress.speed_increase)
@@ -43,10 +45,6 @@ func _process(delta):
 # Function to modify speed dynamically
 func set_falling_speed(new_speed: float):
 	falling_speed = new_speed
-	
-# Function to check the texture ID
-func check_texture_id(falling_object, id_to_check: String) -> bool:
-	return falling_object.get("texture_id") == id_to_check
 
 # Function to detect if the object is clicked
 func _input(event):
@@ -56,8 +54,12 @@ func _input(event):
 			if event.pressed and is_point_in_body(mouse_position):
 				is_grabbed = true
 				grab_offset = global_position - mouse_position  # Store the offset
+				# Change texture to grabbed version
+				sprite.texture = textures[texture_id + "_grabbed"]
 			elif not event.pressed and is_grabbed:
 				is_grabbed = false
+				# Revert texture to the original version
+				sprite.texture = textures[texture_id]
 
 # Function to check if the mouse is within the collision shape
 func is_point_in_body(point: Vector2) -> bool:
