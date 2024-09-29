@@ -4,7 +4,7 @@ extends Node2D
 @onready var countdown_timer: Timer = $SpeedTimer
 
 # Variables for spawning objects
-var spawn_timer: float = 2.0  # Time in seconds between each spawn
+var spawn_timer: float = 1.0  # Time in seconds between each spawn
 var spawn_interval: float = 2.0  # Reset value for the timer
 var screen_size: Vector2 # Screen bounds to control where the objects are spawned
 
@@ -29,7 +29,7 @@ func spawn_object():
 	var falling_object = falling_object_scene.instantiate()
 	var random_x_position = randi() % int(screen_size.x) # Continuously update the label to display the current score
 	
-	falling_object.position = Vector2(random_x_position, 0) # Set the position (random X, Y starting at 0)
+	falling_object.position = Vector2(random_x_position, -50) # Set the position (random X, Y starting at 0)
 
 	add_child(falling_object) # Add the object as a child of the main scene
 
