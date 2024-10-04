@@ -27,15 +27,27 @@ func _process(delta):
 func spawn_object():
 	# Instantiate the falling object scene
 	var falling_object = falling_object_scene.instantiate()
-	var random_x_position = randi() % int(screen_size.x) # Continuously update the label to display the current score
+	# Get the viewport rectangle
+	var viewport = get_viewport_rect()
+	# Calculate the center point
+	var center_x = viewport.size.x * 0.5
+	# Determine the distance from the center (1/4 of the screen width)
+	var distance_from_center = viewport.size.x * 0.25
+	 # Generate random offsets
+	var random_offset_x = randf_range(-distance_from_center, distance_from_center)
+	# Calculate the final spawn position
+	var spawn_position = Vector2(center_x + random_offset_x, -50)
+	# Set the position of the falling object
+	falling_object.position = spawn_position
+	# Start falling animation
 	
-	falling_object.position = Vector2(random_x_position, -50) # Set the position (random X, Y starting at 0)
+	# Add the object as a child of the main scene
+	add_child(falling_object)
 
-	add_child(falling_object) # Add the object as a child of the main scene
 
 
 func update_score_label():
-	$CanvasLayer/HBoxContainer/Label.text = "Score: " + str(ScoreBoard.score) # Update the Label's text to reflect the global score
+	$CanvasLayer/HBoxContainer/ScoreBoard.text = "Score: " + str(ScoreBoard.score) # Update the Label's text to reflect the global score
 
 # Timer for the speed increase of falling_objects
 func _on_speed_timer_timeout() -> void:
