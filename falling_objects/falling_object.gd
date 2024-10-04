@@ -6,6 +6,8 @@ var falling_speed: float = 500.0  # Initial falling speed
 var is_grabbed: bool = false
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
+var velocity: Vector2 = Vector2.ZERO  # Current velocity of the object
+var max_velocity: float = 800  # Maximum velocity limit
 var score_value = 2
 
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn")
@@ -22,7 +24,6 @@ var textures = {
 }
 
 
-
 func _ready() -> void:
 	add_to_group("falling_objects")
 	
@@ -36,11 +37,25 @@ func _ready() -> void:
 	
 func _process(delta):
 	set_falling_speed(GameProgress.speed_increase)
+	
 	if is_grabbed:
-		global_position = get_global_mouse_position() + grab_offset # Move the object while maintaining the offset
+		var mouse_position = get_global_mouse_position()
+		var new_position = mouse_position + grab_offset
+		
+		# Calculate the velocity
+		velocity = (new_position - global_position) / delta
+		# Move the object while maintaining the offset
+		global_position = new_position  
 
 	else:
-		global_position += fall_direction * falling_speed * delta # Continue falling if not grabbed
+		# Clamp velocity before applying
+		if velocity.length() > max_velocity:
+			velocity = velocity.normalized() * max_velocity
+		
+		# If not grabbed, apply the velocity from the release and blend it into falling down
+		global_position += velocity * delta
+		# Gradually switch to falling direction
+		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)  
 
 
 # Function to modify speed dynamically
@@ -74,5 +89,5 @@ func _on_area_entered(area: Area2D) -> void:
 		var other_object = area as FallingObject
 		if other_object.texture_id == texture_id:
 			print("Collision detected with another falling object of the same ID!")
-			ScoreBoard.add_score(score_value) # Update the global score when collision occurs
+			ScoreBoard.add_score(score_value)  # Update the global score when collision occurs
 			queue_free()  # Remove the object after updating the score
