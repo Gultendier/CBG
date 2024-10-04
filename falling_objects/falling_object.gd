@@ -23,7 +23,6 @@ var textures = {
 	"bc2_grabbed": preload("res://image/comments/bad/BadComment2_grabbed.png")
 }
 
-
 func _ready() -> void:
 	add_to_group("falling_objects")
 	
@@ -56,7 +55,6 @@ func _process(delta):
 		global_position += velocity * delta
 		# Gradually switch to falling direction
 		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)  
-
 
 # Function to modify speed dynamically
 func set_falling_speed(new_speed: float):

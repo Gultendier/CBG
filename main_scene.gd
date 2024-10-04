@@ -36,7 +36,7 @@ func spawn_object():
 	 # Generate random offsets
 	var random_offset_x = randf_range(-distance_from_center, distance_from_center)
 	# Calculate the final spawn position
-	var spawn_position = Vector2(center_x + random_offset_x, -50)
+	var spawn_position = Vector2(center_x + random_offset_x, -70)
 	# Set the position of the falling object
 	falling_object.position = spawn_position
 	# Start falling animation
