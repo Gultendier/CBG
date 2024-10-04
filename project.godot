@@ -17,8 +17,9 @@ config/icon="res://image/icon.svg"
 
 [autoload]
 
-ScoreBoard="*res://score_board.gd"
+ScoreBoard="*res://main_scene/score_board/score_board.gd"
 GameProgress="*res://game_progress.gd"
+TransitionScreen="*res://transition_screen.tscn"
 
 [display]
 
