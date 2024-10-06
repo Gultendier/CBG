@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqwd2c5ua63qy"]
+[gd_scene load_steps=8 format=3 uid="uid://dqwd2c5ua63qy"]
 
 [ext_resource type="Script" path="res://transition_screen.gd" id="1_4t2q2"]
+[ext_resource type="FontFile" uid="uid://cadd0qa3tdl1q" path="res://image/fonts/adrip1.ttf" id="2_c36xd"]
 
 [sub_resource type="Animation" id="Animation_uvgl0"]
 length = 0.001
@@ -119,12 +120,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -663.5
-offset_top = -247.0
-offset_right = 663.5
-offset_bottom = 247.0
+offset_left = -527.0
+offset_top = -308.0
+offset_right = 527.0
+offset_bottom = 308.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_c36xd")
 theme_override_font_sizes/font_size = 500
 text = "Delete"
