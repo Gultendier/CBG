@@ -1,15 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://cihjadg1o7jkq"]
 
-[ext_resource type="Texture2D" uid="uid://diro827vt3hr4" path="res://image/Soft White Sprite.png" id="1_7q0wy"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_aaeb7"]
-[ext_resource type="Texture2D" uid="uid://c03q2ut4ih0k" path="res://image/girl/GirlToilet.webp" id="2_thsnq"]
+[ext_resource type="Texture2D" uid="uid://bu3k2bwqjl7xh" path="res://image/Dark_Background.png" id="2_madsa"]
 [ext_resource type="FontFile" uid="uid://cadd0qa3tdl1q" path="res://image/fonts/adrip1.ttf" id="3_aup2l"]
+[ext_resource type="Texture2D" uid="uid://b7wdq7ne5glq2" path="res://image/girl/GirlToiletNoFloor.png" id="3_oe4g1"]
 [ext_resource type="FontFile" uid="uid://61iedld37lrc" path="res://image/fonts/aAnotherTag.ttf" id="4_luut0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oax5m"]
-texture = ExtResource("2_thsnq")
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
+texture = ExtResource("3_oe4g1")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmghp"]
 
@@ -49,29 +47,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aaeb7")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Dark_background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_oax5m")
+texture = ExtResource("2_madsa")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -285.0
-offset_top = -359.5
-offset_right = 285.0
-offset_bottom = 359.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1199.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_7q0wy")
+theme_override_styles/panel = SubResource("StyleBoxTexture_oax5m")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -81,11 +74,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -224.5
-offset_top = -93.0
+offset_top = -165.5
 offset_right = 224.5
-offset_bottom = 238.0
+offset_bottom = 165.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 20
 
 [node name="Start" type="Button" parent="VBoxContainer"]
@@ -141,19 +136,16 @@ text = "Exit"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -327.0
-offset_right = 235.0
-offset_bottom = -133.0
+offset_left = -242.5
+offset_top = 152.0
+offset_right = 242.5
+offset_bottom = 346.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0.337255, 0.635294, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 10
 theme_override_fonts/font = ExtResource("3_aup2l")

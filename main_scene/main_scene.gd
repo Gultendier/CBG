@@ -7,12 +7,10 @@ extends Node2D
 var spawn_timer: float = 1.0  # Time in seconds between each spawn
 var spawn_interval: float = 2.0  # Reset value for the timer
 var screen_size: Vector2 # Screen bounds to control where the objects are spawned
+var spawn_y: float = -50
 
 func _ready():
-	# Get the screen size
-	screen_size = get_viewport_rect().size
-	# Start spawning objects
-	spawn_object()
+	screen_size = get_viewport_rect().size 	# Get the screen size
 
 func _process(delta):
 	# Decrease the spawn timer
@@ -36,7 +34,7 @@ func spawn_object():
 	 # Generate random offsets
 	var random_offset_x = randf_range(-distance_from_center, distance_from_center)
 	# Calculate the final spawn position
-	var spawn_position = Vector2(center_x + random_offset_x, -70)
+	var spawn_position = Vector2(center_x + random_offset_x, spawn_y)
 	# Set the position of the falling object
 	falling_object.position = spawn_position
 	# Start falling animation

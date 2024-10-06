@@ -7,7 +7,7 @@ var is_grabbed: bool = false
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
 var velocity: Vector2 = Vector2.ZERO  # Current velocity of the object
-var max_velocity: float = 800  # Maximum velocity limit
+var max_velocity: float = 600  # Maximum velocity limit
 var score_value = 2
 
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn")

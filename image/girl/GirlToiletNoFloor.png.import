@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c03q2ut4ih0k"
-path="res://.godot/imported/GirlToilet.webp-2fcc3a3f3a1072ca9da2769470258674.ctex"
+uid="uid://b7wdq7ne5glq2"
+path="res://.godot/imported/GirlToiletNoFloor.png-5e29766b38c5d6a44f883b12028f48a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/girl/GirlToilet.webp"
-dest_files=["res://.godot/imported/GirlToilet.webp-2fcc3a3f3a1072ca9da2769470258674.ctex"]
+source_file="res://image/girl/GirlToiletNoFloor.png"
+dest_files=["res://.godot/imported/GirlToiletNoFloor.png-5e29766b38c5d6a44f883b12028f48a1.ctex"]
 
 [params]
 
