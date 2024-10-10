@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 	pass
 	
 func increase_speed():
-	speed_increase += 100
+	speed_increase += 50

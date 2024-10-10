@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main_scene/main_scene.gd" id="1_4trfh"]
 [ext_resource type="Script" path="res://main_scene/score_board/label.gd" id="2_ft3gt"]
-[ext_resource type="Texture2D" uid="uid://2cejsksp6c3r" path="res://image/girl/girlPlaceholder.png" id="3_a0h55"]
+[ext_resource type="Texture2D" uid="uid://cxfynhn0qgngo" path="res://image/girl/girlPlaceholder.png" id="3_a0h55"]
 
 [sub_resource type="Theme" id="Theme_suvf8"]
 
@@ -33,7 +33,7 @@ autostart = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 525.0
-offset_bottom = 1082.0
+offset_bottom = 1333.0
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]

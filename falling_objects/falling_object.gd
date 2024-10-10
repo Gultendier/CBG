@@ -2,7 +2,7 @@ extends Area2D
 class_name FallingObject
 
 # Variables to handle the speed and state
-var falling_speed: float = 500.0  # Initial falling speed
+var falling_speed: float = 600.0  # Initial falling speed
 var is_grabbed: bool = false
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
@@ -18,16 +18,24 @@ var sprite: Sprite2D # Sprite reference
 # Preload the textures and assign IDs
 var textures = {
 	"bc1": preload("res://image/comments/bad/BadComment1.png"),
-	"bc2": preload("res://image/comments/bad/BadComment2.png"),
 	"bc1_grabbed": preload("res://image/comments/bad/BadComment1_grabbed.png"),
-	"bc2_grabbed": preload("res://image/comments/bad/BadComment2_grabbed.png")
+	"bc2": preload("res://image/comments/bad/BadComment2.png"),
+	"bc2_grabbed": preload("res://image/comments/bad/BadComment2_grabbed.png"),
+	"bc3": preload("res://image/comments/bad/BadComment3.png"),
+	"bc3_grabbed": preload("res://image/comments/bad/BadComment3_grabbed.png"),
+	"bc4": preload("res://image/comments/bad/BadComment4.png"),
+	"bc4_grabbed": preload("res://image/comments/bad/BadComment4_grabbed.png"),
+	"bc5": preload("res://image/comments/bad/BadComment5.png"),
+	"bc5_grabbed": preload("res://image/comments/bad/BadComment5_grabbed.png")
 }
+
 
 func _ready() -> void:
 	add_to_group("falling_objects")
 	
 	# Randomly select one of the textures and its ID
-	texture_id = "bc1" if randf() > 0.5 else "bc2"
+	var texture_keys = ["bc1", "bc2", "bc3", "bc4", "bc5"]
+	texture_id = texture_keys[randi() % texture_keys.size()]
 	var texture = textures[texture_id]
 
 	# Get the sprite node and set the initial texture

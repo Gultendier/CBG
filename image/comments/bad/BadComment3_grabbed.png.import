@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxfynhn0qgngo"
-path="res://.godot/imported/girlPlaceholder.png-b1411fc8367ba538b0e864d2297424b9.ctex"
+uid="uid://kbessa6j4rsk"
+path="res://.godot/imported/BadComment3_grabbed.png-7a9562e2cc510eef5bfec0487e823fff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/girl/girlPlaceholder.png"
-dest_files=["res://.godot/imported/girlPlaceholder.png-b1411fc8367ba538b0e864d2297424b9.ctex"]
+source_file="res://image/comments/bad/BadComment3_grabbed.png"
+dest_files=["res://.godot/imported/BadComment3_grabbed.png-7a9562e2cc510eef5bfec0487e823fff.ctex"]
 
 [params]
 

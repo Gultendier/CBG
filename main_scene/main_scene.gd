@@ -4,8 +4,8 @@ extends Node2D
 @onready var countdown_timer: Timer = $SpeedTimer
 
 # Variables for spawning objects
-var spawn_timer: float = 1.0  # Time in seconds between each spawn
-var spawn_interval: float = 2.0  # Reset value for the timer
+var spawn_timer: float = 0.5  # Time in seconds between each spawn
+var spawn_interval: float = 1.0  # Reset value for the timer
 var spawn_y: float = -50
 var screen_size: Vector2 # Screen bounds to control where the objects are spawned
 
