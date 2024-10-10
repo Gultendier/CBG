@@ -2,13 +2,14 @@ extends Area2D
 class_name FallingObject
 
 # Variables to handle the speed and state
-var falling_speed: float = 600.0  # Initial falling speed
-var is_grabbed: bool = false
+var falling_speed: float = 600.0  
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
+var is_grabbed: bool = false
+var selected_object = null # Used 
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
 var velocity: Vector2 = Vector2.ZERO  # Current velocity of the object
-var max_velocity: float = 600  # Maximum velocity limit
-var score_value = 2
+var max_velocity: float = 600 
+var score_value = 2 
 
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn")
 @export var texture_id: String = ""  # Exported variable for the texture ID
