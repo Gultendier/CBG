@@ -11,7 +11,7 @@ var screen_size: Vector2 # Screen bounds to control where the objects are spawne
 
 # List to store positions of all spawned objects
 var object_positions = []
-var min_spawn_distance = 200  # Minimum distance between spawns
+var min_spawn_distance = 250  # Minimum distance between spawns
 
 func _ready():
 	screen_size = get_viewport_rect().size 	# Get the screen size
@@ -43,12 +43,6 @@ func get_valid_spawn_position() -> Vector2:
 	var spawn_x = randf_range(0, viewport.size.x)
 	var spawn_position = Vector2(spawn_x, spawn_y)
 
-	# Check distance to existing objects
-	for existing_pos in object_positions:
-		if existing_pos.distance_to(spawn_position) < min_spawn_distance:
-			print("Too close to existing object, finding new position")
-			pass
-	# If valid, return the spawn position
 	return spawn_position
 
 func update_score_label():

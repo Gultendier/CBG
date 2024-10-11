@@ -5,6 +5,7 @@ class_name FallingObject
 var falling_speed = GameProgress.falling_speed
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var is_grabbed: bool = false
+var was_grabbed: bool = false
 var selected_object = null # Used 
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
 var velocity: Vector2 = Vector2.ZERO  # Current velocity of the object
@@ -72,6 +73,7 @@ func _input(event):
 			var mouse_position = get_global_mouse_position()
 			if event.pressed and is_point_in_body(mouse_position):
 				is_grabbed = true
+				was_grabbed = true
 				grab_offset = global_position - mouse_position  # Store the offset
 				sprite.texture = textures[texture_id + "_grabbed"] # Change texture to grabbed version
 			elif not event.pressed and is_grabbed:
@@ -90,7 +92,7 @@ func is_point_in_body(point: Vector2) -> bool:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("falling_objects"):
 		var other_object = area as FallingObject
-		if other_object.texture_id == texture_id:
+		if other_object.texture_id == texture_id and (was_grabbed or other_object.was_grabbed):
 			print("Collision detected with another falling object of the same ID!")
 			ScoreBoard.add_score(score_value)  # Update the global score when collision occurs
 			queue_free()  # Remove the object after updating the score
