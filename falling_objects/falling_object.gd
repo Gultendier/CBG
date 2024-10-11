@@ -31,7 +31,6 @@ var textures = {
 	"bc5_grabbed": preload("res://image/comments/bad/BadComment5_grabbed.png")
 }
 
-
 func _ready() -> void:
 	add_to_group("falling_objects")
 	
@@ -48,8 +47,6 @@ func _process(delta):
 	if is_grabbed:
 		var mouse_position = get_global_mouse_position()
 		var new_position = mouse_position + grab_offset
-		
-		# Calculate the velocity
 		velocity = (new_position - global_position) / delta
 		# Move the object while maintaining the offset
 		global_position = new_position  

@@ -8,13 +8,10 @@ var spawn_timer: float = 0.5  # Time in seconds between each spawn
 var spawn_interval: float = 1.0  # Reset value for the timer
 var spawn_y: float = -50
 var screen_size: Vector2 # Screen bounds to control where the objects are spawned
-
-# List to store positions of all spawned objects
 var object_positions = []
-var min_spawn_distance = 250  # Minimum distance between spawns
 
 func _ready():
-	screen_size = get_viewport_rect().size 	# Get the screen size
+	screen_size = get_viewport_rect().size
 
 func _process(delta):
 	# Decrease the spawn timer
@@ -22,8 +19,8 @@ func _process(delta):
 	if spawn_timer <= 0:
 		spawn_object()
 		spawn_timer = spawn_interval  # Reset the timer
-		
-	update_score_label() # Continuously update the label to display the current score
+
+	update_score_label() 
 
 # Function to spawn a falling object
 func spawn_object():
@@ -34,10 +31,8 @@ func spawn_object():
 		falling_object.position = spawn_position	
 		# Add the object as a child of the main scene
 		add_child(falling_object)
-		# Store the spawn position to prevent future spawns too close to this one
 		object_positions.append(spawn_position)
 
-# Function to get a valid spawn position that isn't too close to existing objects
 func get_valid_spawn_position() -> Vector2:
 	var viewport = get_viewport_rect()
 	var spawn_x = randf_range(0, viewport.size.x)
@@ -46,7 +41,7 @@ func get_valid_spawn_position() -> Vector2:
 	return spawn_position
 
 func update_score_label():
-	$CanvasLayer/HBoxContainer/ScoreBoard.text = "Score: " + str(ScoreBoard.score) # Update the Label's text to reflect the global score
+	$CanvasLayer/HBoxContainer/ScoreBoard.text = "Score: " + str(ScoreBoard.score) # Update Label's 
 
 # Timer for the speed increase of falling_objects
 func _on_speed_timer_timeout() -> void:
