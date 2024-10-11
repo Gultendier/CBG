@@ -28,7 +28,7 @@ theme_override_font_sizes/font_size = 30
 script = ExtResource("2_ft3gt")
 
 [node name="SpeedTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 5.0
 autostart = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

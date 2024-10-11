@@ -11,7 +11,7 @@ var screen_size: Vector2 # Screen bounds to control where the objects are spawne
 
 # List to store positions of all spawned objects
 var object_positions = []
-var min_spawn_distance = 100  # Minimum distance between spawns
+var min_spawn_distance = 200  # Minimum distance between spawns
 
 func _ready():
 	screen_size = get_viewport_rect().size 	# Get the screen size

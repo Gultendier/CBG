@@ -1,6 +1,6 @@
 extends Node
 
-var speed_increase: float = 100.0
+var falling_speed: float = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 	pass
 	
 func increase_speed():
-	speed_increase += 50
+	falling_speed += 5

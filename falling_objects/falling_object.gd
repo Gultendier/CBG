@@ -1,8 +1,8 @@
 extends Area2D
 class_name FallingObject
 
-# Variables to handle the speed and state
-var falling_speed: float = 600.0  
+# Variables to handle the speed and stat_ze
+var falling_speed = GameProgress.falling_speed
 var fall_direction: Vector2 = Vector2(0, 1)  # Falling down
 var is_grabbed: bool = false
 var selected_object = null # Used 
@@ -44,8 +44,6 @@ func _ready() -> void:
 	sprite.texture = texture
 	
 func _process(delta):
-	set_falling_speed(GameProgress.speed_increase)
-	
 	if is_grabbed:
 		var mouse_position = get_global_mouse_position()
 		var new_position = mouse_position + grab_offset
@@ -65,9 +63,7 @@ func _process(delta):
 		# Gradually switch to falling direction
 		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)  
 
-# Function to modify speed dynamically
-func set_falling_speed(new_speed: float):
-	falling_speed = new_speed
+
 
 # Function to detect if the object is clicked
 func _input(event):
