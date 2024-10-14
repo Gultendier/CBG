@@ -55,13 +55,10 @@ func _process(delta):
 		# Clamp velocity before applying
 		if velocity.length() > max_velocity:
 			velocity = velocity.normalized() * max_velocity
-		
 		# If not grabbed, apply the velocity from the release and blend it into falling down
 		global_position += velocity * delta
 		# Gradually switch to falling direction
 		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)  
-
-
 
 # Function to detect if the object is clicked
 func _input(event):
@@ -90,7 +87,9 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("falling_objects"):
 		var other_object = area as FallingObject
 		if other_object.texture_id == texture_id and (was_grabbed or other_object.was_grabbed):
-			print("Collision detected with another falling object of the same ID!")
+			if !GameProgress.grabbed_for_the_first_time: 
+				GameProgress.trigger_dialog_one()
+			print("Collision detected with another falling object of the same ID! ", texture_id)
 			ScoreBoard.add_score(score_value)  # Update the global score when collision occurs
 			queue_free()  # Remove the object after updating the score
 			

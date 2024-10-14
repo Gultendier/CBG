@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddhp5vwym302n"]
+[gd_scene load_steps=6 format=3 uid="uid://ddhp5vwym302n"]
 
 [ext_resource type="Script" path="res://main_scene/main_scene.gd" id="1_4trfh"]
 [ext_resource type="Script" path="res://main_scene/score_board/label.gd" id="2_ft3gt"]
 [ext_resource type="Texture2D" uid="uid://cxfynhn0qgngo" path="res://image/girl/girlPlaceholder.png" id="3_a0h55"]
+[ext_resource type="PackedScene" uid="uid://mrqayx5bak0g" path="res://dialog_one/dialog_one.tscn" id="4_6b11k"]
 
 [sub_resource type="Theme" id="Theme_suvf8"]
 
@@ -41,5 +42,9 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 texture = ExtResource("3_a0h55")
+
+[node name="DialogOne" type="CanvasLayer" parent="."]
+
+[node name="DialogOne" parent="DialogOne" instance=ExtResource("4_6b11k")]
 
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]

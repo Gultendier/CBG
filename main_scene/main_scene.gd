@@ -9,9 +9,12 @@ var spawn_interval: float = 1.0  # Reset value for the timer
 var spawn_y: float = -50
 var screen_size: Vector2 # Screen bounds to control where the objects are spawned
 var object_positions = []
+var dialog_one: Node = null
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	dialog_one = $DialogOne/DialogOne
+	dialog_one.visible = false
 
 func _process(delta):
 	# Decrease the spawn timer
@@ -19,11 +22,11 @@ func _process(delta):
 	if spawn_timer <= 0:
 		spawn_object()
 		spawn_timer = spawn_interval  # Reset the timer
-
 	update_score_label() 
 
 # Function to spawn a falling object
 func spawn_object():
+	print("spawned")
 	var spawn_position = get_valid_spawn_position()
 	if spawn_position != null:
 		# Instantiate the falling object scene
@@ -41,9 +44,15 @@ func get_valid_spawn_position() -> Vector2:
 	return spawn_position
 
 func update_score_label():
-	$CanvasLayer/HBoxContainer/ScoreBoard.text = "Score: " + str(ScoreBoard.score) # Update Label's 
+	$CanvasLayer/HBoxContainer/ScoreBoard.text = "Score: " + str(ScoreBoard.score)
 
 # Timer for the speed increase of falling_objects
 func _on_speed_timer_timeout() -> void:
 	GameProgress.increase_speed()
 	print("Timer")
+	
+func show_dialog_one():
+	dialog_one.visible = true
+	print("show_dialog_one")
+	
+	
