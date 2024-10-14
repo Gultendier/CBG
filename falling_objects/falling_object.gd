@@ -93,3 +93,8 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Collision detected with another falling object of the same ID!")
 			ScoreBoard.add_score(score_value)  # Update the global score when collision occurs
 			queue_free()  # Remove the object after updating the score
+			
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	ScoreBoard.add_score(-score_value)
+	print("exited")
+	queue_free()
