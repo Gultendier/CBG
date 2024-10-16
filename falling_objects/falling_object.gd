@@ -87,8 +87,8 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("falling_objects"):
 		var other_object = area as FallingObject
 		if other_object.texture_id == texture_id and (was_grabbed or other_object.was_grabbed):
-			if !GameProgress.grabbed_for_the_first_time: 
-				GameProgress.trigger_dialog_one()
+			if !GameProgress.trigger_dialog_one: 
+				GameProgress.control_dialog_one()
 			print("Collision detected with another falling object of the same ID! ", texture_id)
 			ScoreBoard.add_score(score_value)  # Update the global score when collision occurs
 			queue_free()
