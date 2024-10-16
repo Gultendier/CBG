@@ -1,11 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://mrqayx5bak0g"]
+[gd_scene load_steps=5 format=3 uid="uid://mrqayx5bak0g"]
 
 [ext_resource type="Script" path="res://dialog_one/dialog_one.gd" id="1_61s3x"]
-[ext_resource type="Shader" path="res://dialog_one/dialog_one.gdshader" id="2_43d16"]
+
+[sub_resource type="Shader" id="Shader_rr4md"]
+code = "shader_type canvas_item;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+uniform float lod: hint_range(0, 5) = 0.0;
+
+void fragment() {
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gm70y"]
-shader = ExtResource("2_43d16")
+shader = SubResource("Shader_rr4md")
 shader_parameter/lod = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhkko"]
 
 [node name="DialogOne" type="Control"]
 process_mode = 3
@@ -19,11 +31,12 @@ script = ExtResource("1_61s3x")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_gm70y")
-layout_mode = 0
-offset_left = 0.5
-offset_top = 0.5
-offset_right = 1919.5
-offset_bottom = 1084.5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.846021, 0.846075, 0.814595, 1)
 
 [node name="Panel" type="Panel" parent="."]
@@ -34,32 +47,54 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -231.5
-offset_top = -261.5
+offset_top = -90.0
 offset_right = 231.5
-offset_bottom = 261.5
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bhkko")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -35.0
-offset_top = -40.0
-offset_right = 35.0
+offset_top = -61.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Yes" type="Button" parent="Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
 text = "Yes"
 
 [node name="No" type="Button" parent="Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 text = "No"
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.5
+offset_top = -63.0
+offset_right = 205.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Are you sure you want to interfere? It none of your
+business and you would make your self just another
+target."
+autowrap_mode = 2
 
 [connection signal="pressed" from="Panel/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/No" to="." method="_on_no_pressed"]
