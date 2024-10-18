@@ -1,0 +1,4 @@
+Are you sure you want to interfere? It none of your business and you would make your self just another target.
+- Yes
+	[signal arg="true"]
+- No

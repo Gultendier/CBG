@@ -1,30 +1,42 @@
 extends Node
 
-# variables for falling speed
+# Variables for falling speed
 var falling_speed: float = 100
 
-# variables for the game progress
+# Variables for the game progress
 var trigger_dialog_one = false
 var counter_dialog_one = 0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+# Preloaded Dialogic style and timeline
+var dialog_one_style: DialogicStyle
+var dialog_one_timeline
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# Called when the node enters the scene tree for the first time
+func _ready() -> void:
+	# Load and prepare the Dialogic style
+	dialog_one_style = load("res://dialog_one/dialog_one_style.tres")
+	dialog_one_style.prepare()
 	
+	# Preload the Dialogic timeline
+	dialog_one_timeline = Dialogic.preload_timeline("res://dialog_one/dialog_one_timeline.dtl")
+
+# Function to increase speed
 func increase_speed():
 	falling_speed += 5
-	
+
+# Function to control dialog one
 func control_dialog_one():
 	counter_dialog_one += 1
-	print("One: " , counter_dialog_one)
+	print("One: ", counter_dialog_one)
 	if counter_dialog_one == 4:
-		GameProgress.trigger_dialog_one = true
+		# Start the dialog timeline
+		Dialogic.timeline_ended.connect(end_dialog_one)
+		Dialogic.start(dialog_one_timeline).process_mode = Node.PROCESS_MODE_ALWAYS
+		Dialogic.process_mode = Node.PROCESS_MODE_ALWAYS
 		get_tree().paused = true
+		trigger_dialog_one = true
 		print("paused")
-		var main_scene = get_tree().current_scene
-		if main_scene.has_method("show_dialog_one"):
-			main_scene.show_dialog_one()
+		
+func end_dialog_one():
+	Dialogic.timeline_ended.disconnect(end_dialog_one)
+	get_tree().paused = false
