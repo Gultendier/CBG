@@ -1,5 +1,7 @@
 extends Node
 
+var emotional_level = 0
+
 # Variables for falling speed
 var falling_speed: float = 100
 
@@ -40,3 +42,13 @@ func control_dialog_one():
 func end_dialog_one():
 	Dialogic.timeline_ended.disconnect(end_dialog_one)
 	get_tree().paused = false
+
+func dialog_one_choice_yes():
+	# change the image of the girl
+	emotional_level += 10
+	print(emotional_level)
+	
+func dialog_one_choice_no():
+	# change the image of the girl
+	emotional_level -= 10
+	print(emotional_level)
