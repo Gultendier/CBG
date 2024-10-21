@@ -39,7 +39,9 @@ overrides = {}
 [sub_resource type="Resource" id="Resource_ynadq"]
 script = ExtResource("1_6h5g6")
 scene = ExtResource("7_annvk")
-overrides = {}
+overrides = {
+"boxes_v_separation": "100.0"
+}
 
 [sub_resource type="Resource" id="Resource_8whwc"]
 script = ExtResource("1_6h5g6")
@@ -56,4 +58,4 @@ script = ExtResource("10_rj0hg")
 name = "dialog_one_style"
 base_overrides = {}
 layers = Array[ExtResource("1_6h5g6")]([SubResource("Resource_pjkq4"), SubResource("Resource_la40h"), SubResource("Resource_e43ym"), SubResource("Resource_vjawh"), SubResource("Resource_wgooq"), SubResource("Resource_ynadq"), SubResource("Resource_8whwc"), SubResource("Resource_lwun5")])
-metadata/_latest_layer = -1
+metadata/_latest_layer = 6

@@ -68,6 +68,7 @@ func _input(event):
 		var mouse_position = get_global_mouse_position()
 		if event.button_index == MOUSE_BUTTON_LEFT and is_point_in_body(mouse_position):
 			if event.pressed and not is_grabbed and not any_object_grabbed:
+				falling_object_scene
 				is_grabbed = true
 				was_grabbed = true
 				any_object_grabbed = true  # Set the static variable to true
