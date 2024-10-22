@@ -16,11 +16,11 @@ var dialog_one_timeline
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
 	# Load and prepare the Dialogic style
-	dialog_one_style = load("res://dialog_one/dialog_one_style.tres")
+	dialog_one_style = load("res://dialog_one_style/dialog_one_style.tres")
 	dialog_one_style.prepare()
 	
 	# Preload the Dialogic timeline
-	dialog_one_timeline = Dialogic.preload_timeline("res://dialog_one/dialog_one_timeline.dtl")
+	dialog_one_timeline = Dialogic.preload_timeline("res://dialog_one_style/dialog_one_timeline.dtl")
 
 # Function to increase speed
 func increase_speed():

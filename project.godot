@@ -27,10 +27,10 @@ TransitionScreen="*res://transition/transition_screen.tscn"
 
 directories/dch_directory={}
 directories/dtl_directory={
-"dialog_one_timeline": "res://dialog_one/dialog_one_timeline.dtl"
+"dialog_one_timeline": "res://dialog_one_style/dialog_one_timeline.dtl"
 }
-layout/style_list=["res://dialog_one/dialog_one_style/dialog_one_style.tres"]
-layout/default_style="res://dialog_one/dialog_one_style/dialog_one_style.tres"
+layout/style_list=["res://dialog_one_style/dialog_one_style.tres"]
+layout/default_style="res://dialog_one_style/dialog_one_style.tres"
 glossary/default_case_sensitive=true
 variables={}
 extensions_folder="res://addons/dialogic_additions"

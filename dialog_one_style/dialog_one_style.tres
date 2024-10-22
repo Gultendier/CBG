@@ -1,32 +1,33 @@
-[gd_resource type="Resource" script_class="DialogicStyle" load_steps=7 format=3 uid="uid://csqbe2vhrwqgo"]
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=7 format=3 uid="uid://c0m0k5j4peywr"]
 
-[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="1_5d5ka"]
-[ext_resource type="PackedScene" uid="uid://bvna1h8qebt0t" path="res://dialog_one_style/VisualNovelTextbox/dialog_one_textbox.tscn" id="2_cfok2"]
-[ext_resource type="PackedScene" uid="uid://dyq8a8oj0bhdx" path="res://dialog_one_style/Choices/choices.tscn" id="3_qyamk"]
-[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="4_b4vgq"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="1_6qix8"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="2_tkwlu"]
+[ext_resource type="PackedScene" uid="uid://dyq8a8oj0bhdx" path="res://dialog_one_style/Choices/choices.tscn" id="2_tlvyv"]
+[ext_resource type="PackedScene" uid="uid://bvna1h8qebt0t" path="res://dialog_one_style/VisualNovelTextbox/dialog_one_textbox.tscn" id="3_f8ewb"]
 
-[sub_resource type="Resource" id="Resource_5me7a"]
-script = ExtResource("1_5d5ka")
-scene = ExtResource("2_cfok2")
+[sub_resource type="Resource" id="Resource_6eebh"]
+script = ExtResource("1_6qix8")
+scene = ExtResource("2_tlvyv")
 overrides = {
+"boxes_min_size": "Vector2(250, 75)",
+"boxes_v_separation": "5.0"
+}
+
+[sub_resource type="Resource" id="Resource_n7tif"]
+script = ExtResource("1_6qix8")
+scene = ExtResource("3_f8ewb")
+overrides = {
+"box_color_custom": "Color(0, 0, 0, 0.6)",
 "box_margin_bottom": "0.0",
 "box_size": "Vector2(9999, 150)",
 "text_alignment": "1"
 }
 
-[sub_resource type="Resource" id="Resource_imiap"]
-script = ExtResource("1_5d5ka")
-scene = ExtResource("3_qyamk")
-overrides = {
-"boxes_min_size": "Vector2(750, 75)",
-"boxes_v_separation": "5.0"
-}
-
 [resource]
-script = ExtResource("4_b4vgq")
+script = ExtResource("2_tkwlu")
 name = "dialog_one_style"
 base_overrides = {
 "global_bg_color": "Color(0, 0, 0, 0.6)"
 }
-layers = Array[ExtResource("1_5d5ka")]([SubResource("Resource_5me7a"), SubResource("Resource_imiap")])
-metadata/_latest_layer = -1
+layers = Array[ExtResource("1_6qix8")]([SubResource("Resource_6eebh"), SubResource("Resource_n7tif")])
+metadata/_latest_layer = 0
