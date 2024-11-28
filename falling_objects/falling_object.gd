@@ -98,9 +98,11 @@ func _on_area_entered(area: Area2D) -> void:
 				FallingObject.any_object_grabbed = false
 			print("Collision detected with another falling object of the same ID! ", texture_id)
 			ScoreBoard.add_score(score_value)  # Update the global score when collision occurs
+			GameProgress.emotional_level += 10
 			queue_free()
 			
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	ScoreBoard.add_score(-score_value)
+	GameProgress.emotional_level -= 10
 	print("exited")
 	queue_free()

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddhp5vwym302n"]
+[gd_scene load_steps=5 format=3 uid="uid://ddhp5vwym302n"]
 
 [ext_resource type="Script" path="res://main_scene/main_scene.gd" id="1_4trfh"]
 [ext_resource type="Script" path="res://main_scene/score_board/label.gd" id="2_ft3gt"]
 [ext_resource type="Texture2D" uid="uid://cxfynhn0qgngo" path="res://image/girl/girlPlaceholder.png" id="3_a0h55"]
-[ext_resource type="PackedScene" uid="uid://mrqayx5bak0g" path="res://dialog_one/dialog_one.tscn" id="4_6b11k"]
 
 [sub_resource type="Theme" id="Theme_suvf8"]
 
@@ -37,25 +36,15 @@ offset_right = 525.0
 offset_bottom = 1333.0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="GirlImage" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 texture = ExtResource("3_a0h55")
 
-[node name="DialogOne" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
-
-[node name="DialogOne" parent="DialogOne" instance=ExtResource("4_6b11k")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-offset_left = -177.0
-offset_top = -202.0
-offset_right = 177.0
-grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 8
+[node name="EmotionCheckTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
 
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
+[connection signal="timeout" from="EmotionCheckTimer" to="." method="_on_emotion_check_timer_timeout"]

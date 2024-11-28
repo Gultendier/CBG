@@ -1,6 +1,6 @@
 extends Node
 
-var emotional_level = 0
+var emotional_level = 100
 
 # Variables for falling speed
 var falling_speed: float = 100
@@ -21,12 +21,13 @@ func _ready() -> void:
 	
 	# Preload the Dialogic timeline
 	dialog_one_timeline = Dialogic.preload_timeline("res://dialog_one_style/dialog_one_timeline.dtl")
-
+	
 # Function to increase speed
 func increase_speed():
 	falling_speed += 5
+# Function for Emotional Level
 
-# Function to control dialog one
+# Functions to control dialog one
 func control_dialog_one():
 	counter_dialog_one += 1
 	print("One: ", counter_dialog_one)
