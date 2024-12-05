@@ -66,11 +66,14 @@ func change_girl_image_through_emotional_level():
 	if (GameProgress.emotional_level > 80):
 		print("happy")
 		girl_image.texture = girl_textures["happy"]
+		glitch_shader.set_shader_parameter("shake_rate", 0.0)
 	elif (GameProgress.emotional_level <= 80 && GameProgress.emotional_level > 60):
 		girl_image.texture = girl_textures["neutral"]
+		glitch_shader.set_shader_parameter("shake_rate", 0.0)
 	elif (GameProgress.emotional_level <= 60 &&  GameProgress.emotional_level > 40):
 		print("upset")
 		girl_image.texture = girl_textures["upset"]
+		glitch_shader.set_shader_parameter("shake_rate", 0.0)
 	elif (GameProgress.emotional_level <= 40 &&  GameProgress.emotional_level > 20):
 		print("depressed")
 		girl_image.texture = girl_textures["depressed"]
