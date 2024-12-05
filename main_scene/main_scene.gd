@@ -2,23 +2,22 @@ extends Node2D
 
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn") # Preload the FallingObject scene
 @onready var countdown_timer: Timer = $SpeedTimer
-@onready var happy = preload("res://image/girl/girlPlaceholder.png")
-@onready var girl_image = $HBoxContainer/GirlImage
+@onready var girl_image = $VBoxContainer/GirlImage
 
 # Variables for spawning objects
 var screen_size: Vector2 # Screen bounds to control objects spawn
-var spawn_timer: float = 0.5  # Time in seconds between each spawn
-var spawn_interval: float = 1.0  # Reset value for the timer
-var spawn_y: float = -50
+@export var spawn_timer: float = 0.5  # Time in seconds between each spawn
+@export var spawn_interval: float = 1.0  # Reset value for the timer
+@export var spawn_y: float = -50
 var object_positions = []
-# Variables for Emotional
-var emotional_level_1 = false
-var emotional_level_2 = false
-var emotional_level_3 = false
-var emotional_level_4 = false
-var emotional_level_5 = false
-var emotional_level_6 = false
 
+var girl_textures = {
+	"happy": preload("res://image/girl/1. happy.png"),
+	"neutral": preload("res://image/girl/2. neutral.png"),
+	"upset": preload("res://image/girl/3. upset.png"),
+	"depressed": preload("res://image/girl/4. depressed.png"),
+	"crying": preload("res://image/girl/5. crying.png"),
+}
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -64,14 +63,18 @@ func _on_emotion_check_timer_timeout() -> void:
 func change_girl_image_through_emotional_level():
 	
 	if (GameProgress.emotional_level > 80):
-		print("Waited")
+		print("happy")
+		girl_image.texture = girl_textures["happy"]
 	elif (GameProgress.emotional_level <= 80 && GameProgress.emotional_level > 60):
-		print("Waited 2")
+		girl_image.texture = girl_textures["neutral"]
 	elif (GameProgress.emotional_level <= 60 &&  GameProgress.emotional_level > 40):
-		print("Waited 3")
+		print("upset")
+		girl_image.texture = girl_textures["upset"]
 	elif (GameProgress.emotional_level <= 40 &&  GameProgress.emotional_level > 20):
-		print("Waited 4")
+		print("depressed")
+		girl_image.texture = girl_textures["depressed"]
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
-		print("Waited 5")
+		print("crying")
+		girl_image.texture = girl_textures["crying"]
 	elif (GameProgress.emotional_level <= 0):
-		print("Waited 6")
+		print("lose")

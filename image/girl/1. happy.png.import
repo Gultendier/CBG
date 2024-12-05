@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu3k2bwqjl7xh"
-path="res://.godot/imported/Dark_Background.png-e7c3cde63d72aa67d9a83ca2b42a3086.ctex"
+uid="uid://cvi1hqnls4y5u"
+path="res://.godot/imported/1. happy.png-0ad06601c4f82b808b48a41e1092140e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/Dark_Background.png"
-dest_files=["res://.godot/imported/Dark_Background.png-e7c3cde63d72aa67d9a83ca2b42a3086.ctex"]
+source_file="res://image/girl/1. happy.png"
+dest_files=["res://.godot/imported/1. happy.png-0ad06601c4f82b808b48a41e1092140e.ctex"]
 
 [params]
 

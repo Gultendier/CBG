@@ -1,9 +1,9 @@
 extends Node
 
-var emotional_level = 100
+@export var emotional_level = 70
 
 # Variables for falling speed
-var falling_speed: float = 100
+@export var falling_speed: float = 100
 
 # Variables for the game progress
 var trigger_dialog_one = false
@@ -25,7 +25,6 @@ func _ready() -> void:
 # Function to increase speed
 func increase_speed():
 	falling_speed += 5
-# Function for Emotional Level
 
 # Functions to control dialog one
 func control_dialog_one():

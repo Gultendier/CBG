@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxfynhn0qgngo"
-path="res://.godot/imported/girlPlaceholder.png-b1411fc8367ba538b0e864d2297424b9.ctex"
+uid="uid://gifcc7k8dlyy"
+path="res://.godot/imported/3. upset.png-2c4b0e70049b032228b25048e7e69870.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/girl/girlPlaceholder.png"
-dest_files=["res://.godot/imported/girlPlaceholder.png-b1411fc8367ba538b0e864d2297424b9.ctex"]
+source_file="res://image/girl/3. upset.png"
+dest_files=["res://.godot/imported/3. upset.png-2c4b0e70049b032228b25048e7e69870.ctex"]
 
 [params]
 
