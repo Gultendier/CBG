@@ -3,6 +3,7 @@ extends Node2D
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn") # Preload the FallingObject scene
 @onready var countdown_timer: Timer = $SpeedTimer
 @onready var girl_image = $VBoxContainer/GirlImage
+@onready var glitch_shader = $CanvasLayer/GlitchRect.material
 
 # Variables for spawning objects
 var screen_size: Vector2 # Screen bounds to control objects spawn
@@ -73,8 +74,15 @@ func change_girl_image_through_emotional_level():
 	elif (GameProgress.emotional_level <= 40 &&  GameProgress.emotional_level > 20):
 		print("depressed")
 		girl_image.texture = girl_textures["depressed"]
+		glitch_shader.set_shader_parameter("shake_rate", 0.1)
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
 		print("crying")
 		girl_image.texture = girl_textures["crying"]
+		glitch_shader.set_shader_parameter("shake_rate", 0.2)
 	elif (GameProgress.emotional_level <= 0):
 		print("lose")
+		glitch_shader.set_shader_parameter("shake_rate", 0.3)
+
+
+func _on_button_pressed() -> void:
+	GameProgress.emotional_level = 40
