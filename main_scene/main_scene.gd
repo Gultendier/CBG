@@ -53,43 +53,22 @@ func _on_speed_timer_timeout() -> void:
 	GameProgress.increase_speed()
 	print("Timer")
 	
-func _on_emotion_check_timer_timeout() -> void:
-	change_girl_image_through_emotional_level()
-
-# TODO Make the changes to the game a func and use para for it and create an animation for it
-func change_girl_image_through_emotional_level():
+func _on_emotion_check_timer_timeout():
 	if (GameProgress.emotional_level > 80):
-		print("happy")
-		girl_image.texture = girl_textures["happy"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.0)
+		progress_change(0.0, "happy", 0.0)
 	elif (GameProgress.emotional_level <= 80 && GameProgress.emotional_level > 60):
-		girl_image.texture = girl_textures["neutral"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.0)
+		progress_change(0.0, "neutral", 0.0)
 	elif (GameProgress.emotional_level <= 60 &&  GameProgress.emotional_level > 40):
-		print("upset")
-		girl_image.texture = girl_textures["upset"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.0)
+		progress_change(0.0, "upset", 0.0)
 	elif (GameProgress.emotional_level <= 40 &&  GameProgress.emotional_level > 20):
-		print("depressed")
-		girl_image.texture = girl_textures["depressed"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.0)
-		fade_color_rect(0.3)
+		progress_change(0.3, "depressed", 0.0)
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
-		print("crying")
-		girl_image.texture = girl_textures["crying"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.1)
-		fade_color_rect(0.4)
+		progress_change(0.4, "crying", 0.1)
 	elif (GameProgress.emotional_level <= 0):
-		print("lose")
-		girl_image.texture = girl_textures["crying"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.15)
-		fade_color_rect(0.5)
+		progress_change(0.5, "crying", 0.15)
 		
-func fade_color_rect(alpha):
+func progress_change(alpha, image_name, shake_rate):
 	var tween = create_tween()
-	tween.tween_property(color_overlay,"color",Color(0,0,0,alpha),2)
-
-func _input(event: InputEvent):
-	if Input.is_action_pressed("ui_right"):
-		print("fade")
-		fade_color_rect(0.5)
+	tween.tween_property(color_overlay,"color",Color(0,0,0,alpha),1)
+	girl_image.texture = girl_textures[image_name]
+	glitch_shader.set_shader_parameter("shake_rate", shake_rate)
