@@ -1,11 +1,12 @@
 extends Node2D
 
-@export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn") # Preload the FallingObject scene
 @onready var countdown_timer: Timer = $SpeedTimer
 @onready var girl_image = $VBoxContainer/GirlImage
 @onready var glitch_shader = $CanvasLayer/GlitchRect.material
+@onready var color_overlay = $CanvasLayer/ColorOverlay
 
 # Variables for spawning objects
+var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn") 
 var screen_size: Vector2 # Screen bounds to control objects spawn
 @export var spawn_timer: float = 0.5  # Time in seconds between each spawn
 @export var spawn_interval: float = 1.0  # Reset value for the timer
@@ -20,8 +21,6 @@ var girl_textures = {
 	"crying": preload("res://image/girl/5. crying.png"),
 }
 
-func _ready():
-	screen_size = get_viewport_rect().size
 
 func _process(delta):
 	# Decrease the spawn timer
@@ -29,7 +28,6 @@ func _process(delta):
 	if spawn_timer <= 0:
 		spawn_object()
 		spawn_timer = spawn_interval  # Reset the timer
-	update_score_label()
 
 # Function to spawn a falling object
 func spawn_object():
@@ -55,14 +53,11 @@ func _on_speed_timer_timeout() -> void:
 	GameProgress.increase_speed()
 	print("Timer")
 	
-func update_score_label():
-	$CanvasLayer/HBoxContainer/ScoreBoard.text = "Score: " + str(ScoreBoard.score)
-
 func _on_emotion_check_timer_timeout() -> void:
 	change_girl_image_through_emotional_level()
 
+# TODO Make the changes to the game a func and use para for it and create an animation for it
 func change_girl_image_through_emotional_level():
-	
 	if (GameProgress.emotional_level > 80):
 		print("happy")
 		girl_image.texture = girl_textures["happy"]
@@ -77,15 +72,24 @@ func change_girl_image_through_emotional_level():
 	elif (GameProgress.emotional_level <= 40 &&  GameProgress.emotional_level > 20):
 		print("depressed")
 		girl_image.texture = girl_textures["depressed"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.1)
+		glitch_shader.set_shader_parameter("shake_rate", 0.0)
+		fade_color_rect(0.3)
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
 		print("crying")
 		girl_image.texture = girl_textures["crying"]
-		glitch_shader.set_shader_parameter("shake_rate", 0.2)
+		glitch_shader.set_shader_parameter("shake_rate", 0.1)
+		fade_color_rect(0.4)
 	elif (GameProgress.emotional_level <= 0):
 		print("lose")
-		glitch_shader.set_shader_parameter("shake_rate", 0.3)
+		girl_image.texture = girl_textures["crying"]
+		glitch_shader.set_shader_parameter("shake_rate", 0.15)
+		fade_color_rect(0.5)
+		
+func fade_color_rect(alpha):
+	var tween = create_tween()
+	tween.tween_property(color_overlay,"color",Color(0,0,0,alpha),2)
 
-
-func _on_button_pressed() -> void:
-	GameProgress.emotional_level = 40
+func _input(event: InputEvent):
+	if Input.is_action_pressed("ui_right"):
+		print("fade")
+		fade_color_rect(0.5)

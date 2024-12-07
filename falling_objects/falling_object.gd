@@ -35,13 +35,10 @@ var textures = {
 
 func _ready() -> void:
 	add_to_group("falling_objects")
-	
 	# Randomly select one of the textures and its ID
 	var texture_keys = ["bc1", "bc2", "bc3", "bc4", "bc5"]
 	texture_id = texture_keys[randi() % texture_keys.size()]
 	var texture = textures[texture_id]
-
-	# Get the sprite node and set the initial texture
 	sprite = get_node("Sprite2D")
 	sprite.texture = texture
 	
@@ -71,9 +68,9 @@ func _input(event):
 				falling_object_scene
 				is_grabbed = true
 				was_grabbed = true
-				any_object_grabbed = true  # Set the static variable to true
-				grab_offset = global_position - mouse_position  # Store the offset
-				sprite.texture = textures[texture_id + "_grabbed"] # Change texture to grabbed version
+				any_object_grabbed = true  
+				grab_offset = global_position - mouse_position 
+				sprite.texture = textures[texture_id + "_grabbed"]
 			elif not event.pressed and is_grabbed:
 				is_grabbed = false
 				any_object_grabbed = false  # Reset the static variable on release
@@ -97,12 +94,10 @@ func _on_area_entered(area: Area2D) -> void:
 			if is_grabbed:
 				FallingObject.any_object_grabbed = false
 			print("Collision detected with another falling object of the same ID! ", texture_id)
-			ScoreBoard.add_score(score_value)  # Update the global score when collision occurs
 			GameProgress.emotional_level += 10
 			queue_free()
 			
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	ScoreBoard.add_score(-score_value)
 	GameProgress.emotional_level -= 10
 	print("exited")
 	queue_free()
