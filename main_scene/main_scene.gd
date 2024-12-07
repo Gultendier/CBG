@@ -21,7 +21,6 @@ var girl_textures = {
 	"crying": preload("res://image/girl/5. crying.png"),
 }
 
-
 func _process(delta):
 	# Decrease the spawn timer
 	spawn_timer -= delta
@@ -69,6 +68,10 @@ func _on_emotion_check_timer_timeout():
 		
 func progress_change(alpha, image_name, shake_rate):
 	var tween = create_tween()
-	tween.tween_property(color_overlay,"color",Color(0,0,0,alpha),1)
+	tween.tween_property(color_overlay,"color",Color(0,0,0,alpha),0.5)
 	girl_image.texture = girl_textures[image_name]
 	glitch_shader.set_shader_parameter("shake_rate", shake_rate)
+	
+func _input(event: InputEvent) -> void:
+	if Input.is_action_pressed("ui_right"):
+		_on_emotion_check_timer_timeout()
