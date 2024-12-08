@@ -19,26 +19,12 @@ var score_value = 2
 
 var sprite: Sprite2D  # Sprite reference
 
-# Preload the textures and assign IDs
-var textures = {
-	"bc1": preload("res://image/comments/bad/BadComment1.png"),
-	"bc1_grabbed": preload("res://image/comments/bad/BadComment1_grabbed.png"),
-	"bc2": preload("res://image/comments/bad/BadComment2.png"),
-	"bc2_grabbed": preload("res://image/comments/bad/BadComment2_grabbed.png"),
-	"bc3": preload("res://image/comments/bad/BadComment3.png"),
-	"bc3_grabbed": preload("res://image/comments/bad/BadComment3_grabbed.png"),
-	"bc4": preload("res://image/comments/bad/BadComment4.png"),
-	"bc4_grabbed": preload("res://image/comments/bad/BadComment4_grabbed.png"),
-	"bc5": preload("res://image/comments/bad/BadComment5.png"),
-	"bc5_grabbed": preload("res://image/comments/bad/BadComment5_grabbed.png")
-}
-
 func _ready() -> void:
 	add_to_group("falling_objects")
 	# Randomly select one of the textures and its ID
 	var texture_keys = ["bc1", "bc2", "bc3", "bc4", "bc5"]
 	texture_id = texture_keys[randi() % texture_keys.size()]
-	var texture = textures[texture_id]
+	var texture = ImageLoader.textures[texture_id]
 	sprite = get_node("Sprite2D")
 	sprite.texture = texture
 
@@ -53,8 +39,8 @@ func _input(event):
 				was_grabbed = true
 				any_object_grabbed = true
 				grab_offset = global_position - mouse_position
-				if texture_id + "_grabbed" in textures:
-					sprite.texture = textures[texture_id + "_grabbed"]
+				if texture_id + "_grabbed" in ImageLoader.textures:
+					sprite.texture = ImageLoader.textures[texture_id + "_grabbed"]
 				print("Object grabbed: ", texture_id)
 			elif not event.pressed and is_grabbed:
 				release_object()
@@ -69,8 +55,7 @@ func _input(event):
 func _process(delta: float) -> void:
 	# Apply falling behavior when not grabbed
 	if not is_grabbed:
-		# Clamp velocity before applying
-		if velocity.length() > max_velocity:
+		if velocity.length() > max_velocity: 	# Clamp velocity before applying
 			velocity = velocity.normalized() * max_velocity
 		# Apply the velocity and simulate falling
 		global_position += velocity * delta
@@ -79,8 +64,8 @@ func _process(delta: float) -> void:
 func release_object():
 	is_grabbed = false
 	any_object_grabbed = false
-	if texture_id in textures:
-		sprite.texture = textures[texture_id]
+	if texture_id in ImageLoader.textures:
+		sprite.texture = ImageLoader.textures[texture_id]
 	print("Object released: ", texture_id)
 
 # Function to check if the mouse is within the collision shape

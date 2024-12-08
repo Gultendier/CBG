@@ -8,19 +8,10 @@ extends Node2D
 # Variables for spawning objects
 var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn") 
 var screen_size: Vector2 # Screen bounds to control objects spawn
-@export var spawn_timer: float = 0.5  # Time in seconds between each spawn
-@export var spawn_interval: float = 1.0  # Reset value for the timer
-@export var spawn_y: float = -50
+@export var spawn_timer: float = 0.5  ## Time in seconds between each spawn
+@export var spawn_interval: float = 1.0  ## Reset value for the timer
+@export var spawn_y: float = -50 ## Spawn coordinates Y
 var object_positions = []
-
-var girl_textures = {
-	"happy": preload("res://image/girl/1. happy.png"),
-	"neutral": preload("res://image/girl/2. neutral.png"),
-	"upset": preload("res://image/girl/3. upset.png"),
-	"depressed": preload("res://image/girl/4. depressed.png"),
-	"crying": preload("res://image/girl/5. crying.png"),
-	"dead": preload("res://image/gallow.png")
-}
 
 func _process(delta):
 	# Decrease the spawn timer
@@ -63,14 +54,14 @@ func _on_emotion_check_timer_timeout():
 	elif (GameProgress.emotional_level <= 40 &&  GameProgress.emotional_level > 20):
 		progress_change(0.3, "depressed", 0.0)
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
-		progress_change(0.4, "crying", 0.1)
+		progress_change(0.4, "crying", 0.15)
 	elif (GameProgress.emotional_level <= 0):
-		progress_change(0.5, "dead", 0.15)
+		progress_change(0.5, "dead", 0.2)
 		
 func progress_change(alpha, image_name, shake_rate):
 	var tween = create_tween()
 	tween.tween_property(color_overlay,"color",Color(0,0,0,alpha),0.5)
-	girl_image.texture = girl_textures[image_name]
+	girl_image.texture = ImageLoader.girl_textures[image_name]
 	glitch_shader.set_shader_parameter("shake_rate", shake_rate)
 	
 func _input(event: InputEvent):

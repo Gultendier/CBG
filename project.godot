@@ -19,6 +19,7 @@ config/icon="res://image/icon.svg"
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+ImageLoader="*res://image_loader.gd"
 GameProgress="*res://game_progress.gd"
 TransitionScreen="*res://transition/transition_screen.tscn"
 

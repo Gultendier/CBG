@@ -48,11 +48,9 @@ func end_dialog_one():
 	get_tree().paused = false
 
 func dialog_one_choice_yes():
-	# change the image of the girl
 	emotional_level += 10
 	print(emotional_level)
 	
 func dialog_one_choice_no():
-	# change the image of the girl
 	emotional_level -= 10
 	print(emotional_level)
