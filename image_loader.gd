@@ -1,23 +1,31 @@
 extends Node
 
-var textures = {
-	"bc1": preload("res://image/comments/bad/BadComment1.png"),
-	"bc1_grabbed": preload("res://image/comments/bad/BadComment1_grabbed.png"),
-	"bc2": preload("res://image/comments/bad/BadComment2.png"),
-	"bc2_grabbed": preload("res://image/comments/bad/BadComment2_grabbed.png"),
-	"bc3": preload("res://image/comments/bad/BadComment3.png"),
-	"bc3_grabbed": preload("res://image/comments/bad/BadComment3_grabbed.png"),
-	"bc4": preload("res://image/comments/bad/BadComment4.png"),
-	"bc4_grabbed": preload("res://image/comments/bad/BadComment4_grabbed.png"),
-	"bc5": preload("res://image/comments/bad/BadComment5.png"),
-	"bc5_grabbed": preload("res://image/comments/bad/BadComment5_grabbed.png")
-}
+var textures = {}
+var girl_textures = {}
 
-var girl_textures = {
-	"happy": preload("res://image/girl/1. happy.png"),
-	"neutral": preload("res://image/girl/2. neutral.png"),
-	"upset": preload("res://image/girl/3. upset.png"),
-	"depressed": preload("res://image/girl/4. depressed.png"),
-	"crying": preload("res://image/girl/5. crying.png"),
-	"dead": preload("res://image/gallow.png")
-}	
+func _ready():
+	# Load bad comment textures
+	textures["bc1"] = load_resource("res://image/comments/bad/BadComment1.png")
+	textures["bc1_grabbed"] = load_resource("res://image/comments/bad/BadComment1_grabbed.png")
+	textures["bc2"] = load_resource("res://image/comments/bad/BadComment2.png")
+	textures["bc2_grabbed"] = load_resource("res://image/comments/bad/BadComment2_grabbed.png")
+	textures["bc3"] = load_resource("res://image/comments/bad/BadComment3.png")
+	textures["bc3_grabbed"] = load_resource("res://image/comments/bad/BadComment3_grabbed.png")
+	textures["bc4"] = load_resource("res://image/comments/bad/BadComment4.png")
+	textures["bc4_grabbed"] = load_resource("res://image/comments/bad/BadComment4_grabbed.png")
+	textures["bc5"] = load_resource("res://image/comments/bad/BadComment5.png")
+	textures["bc5_grabbed"] = load_resource("res://image/comments/bad/BadComment5_grabbed.png")
+
+	# Load girl textures
+	girl_textures["happy"] = load_resource("res://image/girl/1. happy.png")
+	girl_textures["neutral"] = load_resource("res://image/girl/2. neutral.png")
+	girl_textures["upset"] = load_resource("res://image/girl/3. upset.png")
+	girl_textures["depressed"] = load_resource("res://image/girl/4. depressed.png")
+	girl_textures["crying"] = load_resource("res://image/girl/5. crying.png")
+	girl_textures["dead"] = load_resource("res://image/gallow.png")
+
+func load_resource(path: String) -> Resource:
+	var resource = ResourceLoader.load(path)
+	if not resource:
+		print("Failed to load resource: %s" % path)
+	return resource
