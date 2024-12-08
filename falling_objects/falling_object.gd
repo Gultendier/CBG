@@ -11,13 +11,13 @@ var is_grabbed: bool = false
 var was_grabbed: bool = false
 var grab_offset: Vector2 = Vector2.ZERO  # Offset between object position and mouse when grabbed
 var velocity: Vector2 = Vector2.ZERO  # Current velocity of the object
-var max_velocity: float = 600 
-var score_value = 2 
+var max_velocity: float = 600
+var score_value = 2
 
 @export var falling_object_scene: PackedScene = preload("res://falling_objects/falling_object.tscn")
 @export var texture_id: String = ""  # Exported variable for the texture ID
 
-var sprite: Sprite2D # Sprite reference
+var sprite: Sprite2D  # Sprite reference
 
 # Preload the textures and assign IDs
 var textures = {
@@ -41,22 +41,6 @@ func _ready() -> void:
 	var texture = textures[texture_id]
 	sprite = get_node("Sprite2D")
 	sprite.texture = texture
-	
-func _process(delta):
-	if is_grabbed and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		var mouse_position = get_global_mouse_position()
-		var new_position = mouse_position + grab_offset
-		velocity = (new_position - global_position) / delta
-		# Move the object while maintaining the offset
-		global_position = new_position  
-	else:
-		# Clamp velocity before applying
-		if velocity.length() > max_velocity:
-			velocity = velocity.normalized() * max_velocity
-		# If not grabbed, apply the velocity from the release and blend it into falling down
-		global_position += velocity * delta
-		# Gradually switch to falling direction
-		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)  
 
 # Function to detect if the object is clicked
 func _input(event):
@@ -74,6 +58,23 @@ func _input(event):
 				print("Object grabbed: ", texture_id)
 			elif not event.pressed and is_grabbed:
 				release_object()
+
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_grabbed:
+		# Handle object movement while grabbed
+		var mouse_position = get_global_mouse_position()
+		var new_position = mouse_position + grab_offset
+		velocity = (new_position - global_position) / get_physics_process_delta_time()
+		global_position = new_position
+
+func _process(delta: float) -> void:
+	# Apply falling behavior when not grabbed
+	if not is_grabbed:
+		# Clamp velocity before applying
+		if velocity.length() > max_velocity:
+			velocity = velocity.normalized() * max_velocity
+		# Apply the velocity and simulate falling
+		global_position += velocity * delta
+		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)
 
 func release_object():
 	is_grabbed = false
@@ -102,7 +103,7 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Collision detected with another falling object of the same ID! ", texture_id)
 			GameProgress.increase_emotional_level(1)
 			queue_free()
-			
+
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	GameProgress.decrease_emotional_level(2)
 	queue_free()
