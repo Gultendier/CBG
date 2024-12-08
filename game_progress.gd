@@ -18,13 +18,17 @@ func _ready() -> void:
 	# Load and prepare the Dialogic style
 	dialog_one_style = load("res://dialog_one_style/dialog_one_style.tres")
 	dialog_one_style.prepare()
-	
 	# Preload the Dialogic timeline
 	dialog_one_timeline = Dialogic.preload_timeline("res://dialog_one_style/dialog_one_timeline.dtl")
 	
-# Function to increase speed
 func increase_speed():
 	falling_speed += 5
+
+func increase_emotional_level(increase):
+	emotional_level += increase
+
+func decrease_emotional_level(decrease):
+	emotional_level -= decrease
 
 # Functions to control dialog one
 func control_dialog_one():

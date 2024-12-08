@@ -17,7 +17,6 @@ config/icon="res://image/icon.svg"
 
 [autoload]
 
-ScoreBoard="*res://main_scene/score_board/score_board.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameProgress="*res://game_progress.gd"

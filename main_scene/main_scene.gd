@@ -19,6 +19,7 @@ var girl_textures = {
 	"upset": preload("res://image/girl/3. upset.png"),
 	"depressed": preload("res://image/girl/4. depressed.png"),
 	"crying": preload("res://image/girl/5. crying.png"),
+	"dead": preload("res://image/gallow.png")
 }
 
 func _process(delta):
@@ -64,7 +65,7 @@ func _on_emotion_check_timer_timeout():
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
 		progress_change(0.4, "crying", 0.1)
 	elif (GameProgress.emotional_level <= 0):
-		progress_change(0.5, "crying", 0.15)
+		progress_change(0.5, "dead", 0.15)
 		
 func progress_change(alpha, image_name, shake_rate):
 	var tween = create_tween()
@@ -72,6 +73,6 @@ func progress_change(alpha, image_name, shake_rate):
 	girl_image.texture = girl_textures[image_name]
 	glitch_shader.set_shader_parameter("shake_rate", shake_rate)
 	
-func _input(event: InputEvent) -> void:
+func _input(event: InputEvent):
 	if Input.is_action_pressed("ui_right"):
 		_on_emotion_check_timer_timeout()

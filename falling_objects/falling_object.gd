@@ -43,13 +43,12 @@ func _ready() -> void:
 	sprite.texture = texture
 	
 func _process(delta):
-	if is_grabbed:
+	if is_grabbed and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		var mouse_position = get_global_mouse_position()
 		var new_position = mouse_position + grab_offset
 		velocity = (new_position - global_position) / delta
 		# Move the object while maintaining the offset
 		global_position = new_position  
-
 	else:
 		# Clamp velocity before applying
 		if velocity.length() > max_velocity:
@@ -61,20 +60,27 @@ func _process(delta):
 
 # Function to detect if the object is clicked
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var mouse_position = get_global_mouse_position()
-		if event.button_index == MOUSE_BUTTON_LEFT and is_point_in_body(mouse_position):
+		if is_point_in_body(mouse_position):
 			if event.pressed and not is_grabbed and not any_object_grabbed:
-				falling_object_scene
+				# Object is grabbed
 				is_grabbed = true
 				was_grabbed = true
-				any_object_grabbed = true  
-				grab_offset = global_position - mouse_position 
-				sprite.texture = textures[texture_id + "_grabbed"]
+				any_object_grabbed = true
+				grab_offset = global_position - mouse_position
+				if texture_id + "_grabbed" in textures:
+					sprite.texture = textures[texture_id + "_grabbed"]
+				print("Object grabbed: ", texture_id)
 			elif not event.pressed and is_grabbed:
-				is_grabbed = false
-				any_object_grabbed = false  # Reset the static variable on release
-				sprite.texture = textures[texture_id] # Revert texture to the original version
+				release_object()
+
+func release_object():
+	is_grabbed = false
+	any_object_grabbed = false
+	if texture_id in textures:
+		sprite.texture = textures[texture_id]
+	print("Object released: ", texture_id)
 
 # Function to check if the mouse is within the collision shape
 func is_point_in_body(point: Vector2) -> bool:
@@ -94,10 +100,9 @@ func _on_area_entered(area: Area2D) -> void:
 			if is_grabbed:
 				FallingObject.any_object_grabbed = false
 			print("Collision detected with another falling object of the same ID! ", texture_id)
-			GameProgress.emotional_level += 10
+			GameProgress.increase_emotional_level(1)
 			queue_free()
 			
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	GameProgress.emotional_level -= 10
-	print("exited")
+	GameProgress.decrease_emotional_level(2)
 	queue_free()
