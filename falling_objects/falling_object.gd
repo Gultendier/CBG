@@ -28,6 +28,15 @@ func _ready() -> void:
 	sprite = get_node("Sprite2D")
 	sprite.texture = texture
 
+func _process(delta: float) -> void:
+	# Apply falling behavior when not grabbed
+	if not is_grabbed:
+		if velocity.length() > max_velocity: 	# Clamp velocity before applying
+			velocity = velocity.normalized() * max_velocity
+		# Apply the velocity and simulate falling
+		global_position += velocity * delta
+		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)
+
 # Function to detect if the object is clicked
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -51,15 +60,6 @@ func _input(event):
 		var new_position = mouse_position + grab_offset
 		velocity = (new_position - global_position) / get_physics_process_delta_time()
 		global_position = new_position
-
-func _process(delta: float) -> void:
-	# Apply falling behavior when not grabbed
-	if not is_grabbed:
-		if velocity.length() > max_velocity: 	# Clamp velocity before applying
-			velocity = velocity.normalized() * max_velocity
-		# Apply the velocity and simulate falling
-		global_position += velocity * delta
-		velocity = velocity.move_toward(fall_direction * falling_speed, falling_speed * delta)
 
 func release_object():
 	is_grabbed = false
@@ -86,6 +86,7 @@ func _on_area_entered(area: Area2D) -> void:
 			if is_grabbed:
 				FallingObject.any_object_grabbed = false
 			print("Collision detected with another falling object of the same ID! ", texture_id)
+			GameProgress.play_sound("res://image/sounds/pop.mp3")
 			GameProgress.increase_emotional_level(1)
 			queue_free()
 

@@ -29,6 +29,13 @@ func increase_emotional_level(increase):
 
 func decrease_emotional_level(decrease):
 	emotional_level -= decrease
+	
+func play_sound(sound: String):
+	var player = AudioStreamPlayer.new()
+	player.stream = load(sound)
+	player.finished.connect(player.queue_free)
+	add_child(player)
+	player.play()
 
 # Functions to control dialog one
 func control_dialog_one():

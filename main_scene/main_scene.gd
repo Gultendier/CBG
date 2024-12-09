@@ -50,9 +50,9 @@ func _on_emotion_check_timer_timeout():
 	elif (GameProgress.emotional_level <= 80 && GameProgress.emotional_level > 60):
 		progress_change(0.0, "neutral", 0.0)
 	elif (GameProgress.emotional_level <= 60 &&  GameProgress.emotional_level > 40):
-		progress_change(0.0, "upset", 0.0)
+		progress_change(0.1, "upset", 0.0)
 	elif (GameProgress.emotional_level <= 40 &&  GameProgress.emotional_level > 20):
-		progress_change(0.3, "depressed", 0.0)
+		progress_change(0.25, "depressed", 0.0)
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
 		progress_change(0.4, "crying", 0.15)
 	elif (GameProgress.emotional_level <= 0):
@@ -65,5 +65,9 @@ func progress_change(alpha, image_name, shake_rate):
 	glitch_shader.set_shader_parameter("shake_rate", shake_rate)
 	
 func _input(event: InputEvent):
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_down"):
+		GameProgress.decrease_emotional_level(20)
+		_on_emotion_check_timer_timeout()
+	if Input.is_action_pressed("ui_up"):
+		GameProgress.increase_emotional_level(20)
 		_on_emotion_check_timer_timeout()
