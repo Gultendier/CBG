@@ -64,7 +64,7 @@ func progress_change(alpha, image_name, shake_rate, pitch):
 	tween.tween_property(color_overlay,"color",Color(0,0,0,alpha),0.5)
 	girl_image.texture = ImageLoader.girl_textures[image_name]
 	glitch_shader.set_shader_parameter("shake_rate", shake_rate)
-	tween.tween_property(main_music,"pitch_scale", pitch, 0.1)
+	main_music.pitch_scale = pitch
 	
 func _input(event: InputEvent):
 	if Input.is_action_pressed("ui_up"):
