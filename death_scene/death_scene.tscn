@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://7ubj7qhu7ths"]
+[gd_scene load_steps=5 format=3 uid="uid://7ubj7qhu7ths"]
 
 [ext_resource type="Script" path="res://death_scene/death_scene.gd" id="1_3lvni"]
 [ext_resource type="FontFile" uid="uid://5a12750yaf8l" path="res://assets/fonts/motion-control.bold.otf" id="1_ro1h0"]
 [ext_resource type="Texture2D" uid="uid://drdth7r88e4qy" path="res://assets/image/girl/6. gallow.png" id="2_usg08"]
+[ext_resource type="AudioStream" uid="uid://7hgv4jtfdmox" path="res://assets/sounds/music/Sakura-Girl-Daisy.mp3" id="4_u3v1s"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_3lvni")
@@ -69,3 +70,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_ro1h0")
 theme_override_font_sizes/font_size = 200
 text = "Its Over"
+
+[node name="MainMusic" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_u3v1s")
+pitch_scale = 0.2
+autoplay = true
+parameters/looping = true

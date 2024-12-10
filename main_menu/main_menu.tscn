@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cihjadg1o7jkq"]
+[gd_scene load_steps=9 format=3 uid="uid://cihjadg1o7jkq"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_aaeb7"]
 [ext_resource type="FontFile" uid="uid://5a12750yaf8l" path="res://assets/fonts/motion-control.bold.otf" id="2_dsp7e"]
 [ext_resource type="Texture2D" uid="uid://cc1ax2e0qxe8t" path="res://assets/image/girl/2. neutral.png" id="4_a4twd"]
+[ext_resource type="AudioStream" uid="uid://c030akrrgw02b" path="res://assets/sounds/music/Sakura-Girl-City-Walk.mp3" id="4_hegss"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmghp"]
 
@@ -139,6 +140,12 @@ scale = Vector2(0.53, 0.53)
 [node name="Girl" type="TextureRect" parent="VBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("4_a4twd")
+
+[node name="MainMenuMusic" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_hegss")
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
