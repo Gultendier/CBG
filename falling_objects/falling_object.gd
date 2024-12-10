@@ -50,7 +50,7 @@ func _input(event):
 				grab_offset = global_position - mouse_position
 				if texture_id + "_grabbed" in ImageLoader.textures:
 					sprite.texture = ImageLoader.textures[texture_id + "_grabbed"]
-				print("Object grabbed: ", texture_id)
+				#print("Object grabbed: ", texture_id)
 			elif not event.pressed and is_grabbed:
 				release_object()
 
@@ -66,7 +66,6 @@ func release_object():
 	any_object_grabbed = false
 	if texture_id in ImageLoader.textures:
 		sprite.texture = ImageLoader.textures[texture_id]
-	print("Object released: ", texture_id)
 
 # Function to check if the mouse is within the collision shape
 func is_point_in_body(point: Vector2) -> bool:
@@ -85,7 +84,7 @@ func _on_area_entered(area: Area2D) -> void:
 				GameProgress.control_dialog_one()
 			if is_grabbed:
 				FallingObject.any_object_grabbed = false
-			print("Collision detected with another falling object of the same ID! ", texture_id)
+			#print("Collision detected with another falling object of the same ID! ", texture_id)
 			GameProgress.play_sound("res://assets/sounds/effects/pop.mp3")
 			GameProgress.increase_emotional_level(1)
 			queue_free()

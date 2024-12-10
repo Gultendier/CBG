@@ -21,8 +21,8 @@ func _ready() -> void:
 	# Preload the Dialogic timeline
 	dialog_one_timeline = Dialogic.preload_timeline("res://dialog_one_style/dialog_one_timeline.dtl")
 	
-func increase_speed():
-	falling_speed += 5
+func increase_speed(increase_speed):
+	falling_speed += increase_speed
 
 func increase_emotional_level(increase):
 	emotional_level += increase
@@ -41,7 +41,6 @@ func play_sound(sound: String):
 # Functions to control dialog one
 func control_dialog_one():
 	counter_dialog_one += 1
-	print("One: ", counter_dialog_one)
 	if counter_dialog_one == 4:
 		# Start the dialog timeline
 		Dialogic.timeline_ended.connect(end_dialog_one)
@@ -49,7 +48,6 @@ func control_dialog_one():
 		Dialogic.process_mode = Node.PROCESS_MODE_ALWAYS
 		get_tree().paused = true
 		trigger_dialog_one = true
-		print("paused")
 		
 func end_dialog_one():
 	Dialogic.timeline_ended.disconnect(end_dialog_one)
@@ -57,8 +55,6 @@ func end_dialog_one():
 
 func dialog_one_choice_yes():
 	emotional_level += 10
-	print(emotional_level)
 	
 func dialog_one_choice_no():
 	emotional_level -= 10
-	print(emotional_level)

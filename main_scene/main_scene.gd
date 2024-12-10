@@ -23,7 +23,6 @@ func _process(delta):
 
 # Function to spawn a falling object
 func spawn_object():
-	print("spawned")
 	var spawn_position = get_valid_spawn_position()
 	if spawn_position != null:
 		# Instantiate the falling object scene
@@ -42,9 +41,24 @@ func get_valid_spawn_position() -> Vector2:
 
 # Timer for the speed increase of falling_objects
 func _on_speed_timer_timeout() -> void:
-	GameProgress.increase_speed()
-	print("Timer")
-	
+	GameProgress.increase_speed(5)
+	if GameProgress.falling_speed >= 300:
+		countdown_timer.wait_time = 8
+		spawn_timer = 0.1
+		spawn_interval = 0.6
+	elif GameProgress.falling_speed >= 250:
+		countdown_timer.wait_time = 7
+		spawn_timer = 0.2
+		spawn_interval = 0.7
+	elif GameProgress.falling_speed >= 200:
+		countdown_timer.wait_time = 6
+		spawn_timer = 0.3
+		spawn_interval = 0.8
+	elif GameProgress.falling_speed >= 150:
+		countdown_timer.wait_time = 5
+		spawn_timer = 0.4
+		spawn_interval = 0.9
+
 func _on_emotion_check_timer_timeout():
 	if (GameProgress.emotional_level > 80):
 		progress_change(0.0, "happy", 0.0, 1)
