@@ -9,4 +9,6 @@ func _on_exit_pressed() -> void:
 	get_tree().paused = false
 	GameProgress.emotional_level = 70
 	GameProgress.falling_speed = 100
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
