@@ -57,7 +57,10 @@ func _on_emotion_check_timer_timeout():
 	elif (GameProgress.emotional_level <= 20 &&  GameProgress.emotional_level > 0):
 		progress_change(0.4, "crying", 0.15, 0.2)
 	elif (GameProgress.emotional_level <= 0):
-		progress_change(0.5, "dead", 0.2, 0.1)
+		progress_change(0.5, "crying", 0.2, 0.1)
+		TransitionScreen.transition()
+		await TransitionScreen.on_transition_finished
+		get_tree().change_scene_to_file("res://death_scene/death_scene.tscn")
 		
 func progress_change(alpha, image_name, shake_rate, pitch):
 	var tween = create_tween()

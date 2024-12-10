@@ -20,3 +20,6 @@ func transition():
 	color_rect.visible = true
 	animation_player.play("fade_to_black")
 	
+func transition_ending():
+	color_rect.visible = true
+	animation_player.play("fade_to_dead")

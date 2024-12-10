@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://7ubj7qhu7ths"]
+
+[ext_resource type="Script" path="res://death_scene/death_scene.gd" id="1_3lvni"]
+[ext_resource type="FontFile" uid="uid://5a12750yaf8l" path="res://assets/fonts/motion-control.bold.otf" id="1_ro1h0"]
+[ext_resource type="Texture2D" uid="uid://drdth7r88e4qy" path="res://assets/image/girl/6. gallow.png" id="2_usg08"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_3lvni")
+
+[node name="Background" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2025.0
+offset_top = -1299.0
+offset_right = 4035.0
+offset_bottom = 2345.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorOverlay" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2025.0
+offset_top = -1299.0
+offset_right = 4035.0
+offset_bottom = 2345.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.764706)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 3626.0
+offset_bottom = 2085.0
+scale = Vector2(0.53, 0.53)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_usg08")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 1919.0
+offset_bottom = 1076.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="GameOver" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.539863, 8.66354e-07, 1.92523e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_ro1h0")
+theme_override_font_sizes/font_size = 200
+text = "Its Over"
