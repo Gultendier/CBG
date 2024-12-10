@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cihjadg1o7jkq"]
+[gd_scene load_steps=7 format=3 uid="uid://uha0l23m8egy"]
 
-[ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_aaeb7"]
-[ext_resource type="FontFile" uid="uid://5a12750yaf8l" path="res://assets/fonts/motion-control.bold.otf" id="2_dsp7e"]
-[ext_resource type="Texture2D" uid="uid://cc1ax2e0qxe8t" path="res://assets/image/girl/2. neutral.png" id="4_a4twd"]
-[ext_resource type="AudioStream" uid="uid://c030akrrgw02b" path="res://assets/sounds/music/Sakura-Girl-City-Walk.mp3" id="4_hegss"]
+[ext_resource type="Script" path="res://main_scene/pause.gd" id="1_0qwif"]
+[ext_resource type="FontFile" uid="uid://5a12750yaf8l" path="res://assets/fonts/motion-control.bold.otf" id="2_oyj20"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmghp"]
 
@@ -34,17 +32,20 @@ corner_radius_bottom_left = 16
 shadow_size = 5
 shadow_offset = Vector2(0, 3.51)
 
-[node name="MainMenu" type="Control"]
+[node name="Pause" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_aaeb7")
+script = ExtResource("1_0qwif")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -60,7 +61,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
-[node name="Start" type="Button" parent="VBoxContainer"]
+[node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -69,15 +70,15 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_dsp7e")
+theme_override_fonts/font = ExtResource("2_oyj20")
 theme_override_font_sizes/font_size = 45
 theme_override_styles/focus = SubResource("StyleBoxEmpty_nmghp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_un7us")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2kgd2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_v1ey1")
-text = "Start Game"
+text = "Continue"
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
+[node name="Exit" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -86,7 +87,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_dsp7e")
+theme_override_fonts/font = ExtResource("2_oyj20")
 theme_override_font_sizes/font_size = 45
 theme_override_styles/focus = SubResource("StyleBoxEmpty_nmghp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_un7us")
@@ -94,8 +95,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_2kgd2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_v1ey1")
 text = "Exit"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
+[node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -108,27 +108,11 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0.337255, 0.635294, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 10
-theme_override_fonts/font = ExtResource("2_dsp7e")
+theme_override_fonts/font = ExtResource("2_oyj20")
 theme_override_font_sizes/font_size = 100
-text = "Sympathetic Connection"
+text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.53, 0.53)
-
-[node name="Girl" type="TextureRect" parent="VBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("4_a4twd")
-
-[node name="MainMenuMusic" type="AudioStreamPlayer2D" parent="."]
-process_mode = 3
-stream = ExtResource("4_hegss")
-autoplay = true
-parameters/looping = true
-
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

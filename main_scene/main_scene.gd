@@ -70,7 +70,11 @@ func progress_change(alpha, image_name, shake_rate, pitch):
 	main_music.pitch_scale = pitch
 	
 func _input(event: InputEvent):
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_cancel"):
+		if (!get_tree().paused):
+			$Pause/CanvasLayer.visible = true
+			get_tree().paused = true
+	if Input.is_action_pressed("ui_up"):	
 		GameProgress.increase_emotional_level(20)
 		_on_emotion_check_timer_timeout()
 	if Input.is_action_pressed("ui_down"):

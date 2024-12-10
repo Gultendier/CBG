@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddhp5vwym302n"]
+[gd_scene load_steps=7 format=3 uid="uid://ddhp5vwym302n"]
 
 [ext_resource type="Script" path="res://main_scene/main_scene.gd" id="1_4trfh"]
 [ext_resource type="Shader" path="res://main_scene/glitch.gdshader" id="3_1j7ef"]
-[ext_resource type="Texture2D" uid="uid://cc1ax2e0qxe8t" path="res://assets/image/girl/2. neutral.png" id="3_cfm4b"]
-[ext_resource type="AudioStream" uid="uid://7hgv4jtfdmox" path="res://assets/sounds/music/Sakura-Girl-Daisy.mp3" id="4_4lhy4"]
+[ext_resource type="Texture2D" uid="uid://cc1ax2e0qxe8t" path="res://image/girl/2. neutral.png" id="3_cfm4b"]
+[ext_resource type="AudioStream" uid="uid://7hgv4jtfdmox" path="res://image/sounds/Sakura-Girl-Daisy.mp3" id="4_4lhy4"]
+[ext_resource type="PackedScene" uid="uid://uha0l23m8egy" path="res://main_scene/pause.tscn" id="5_jixvu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryv11"]
 shader = ExtResource("3_1j7ef")
@@ -78,6 +79,9 @@ process_mode = 3
 stream = ExtResource("4_4lhy4")
 autoplay = true
 parameters/looping = true
+
+[node name="Pause" parent="." instance=ExtResource("5_jixvu")]
+visible = false
 
 [connection signal="timeout" from="EmotionCheckTimer" to="." method="_on_emotion_check_timer_timeout"]
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
