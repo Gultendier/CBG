@@ -86,7 +86,7 @@ func _on_area_entered(area: Area2D) -> void:
 			if is_grabbed:
 				FallingObject.any_object_grabbed = false
 			print("Collision detected with another falling object of the same ID! ", texture_id)
-			GameProgress.play_sound("res://assets/image/sounds/pop.mp3")
+			GameProgress.play_sound("res://assets/sounds/effects/pop.mp3")
 			GameProgress.increase_emotional_level(1)
 			queue_free()
 
