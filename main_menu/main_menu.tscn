@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_aaeb7"]
 [ext_resource type="FontFile" uid="uid://5a12750yaf8l" path="res://assets/fonts/motion-control.bold.otf" id="2_dsp7e"]
-[ext_resource type="Texture2D" uid="uid://cc1ax2e0qxe8t" path="res://image/girl/2. neutral.png" id="4_a4twd"]
 [ext_resource type="AudioStream" uid="uid://c030akrrgw02b" path="res://assets/sounds/music/Sakura-Girl-City-Walk.mp3" id="4_hegss"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmghp"]
@@ -33,6 +32,9 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 shadow_offset = Vector2(0, 3.51)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pqsst"]
+load_path = "res://.godot/imported/2. neutral.png-9e84c8b487cd8c5d80644860093644d0.ctex"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -122,7 +124,7 @@ scale = Vector2(0.53, 0.53)
 
 [node name="Girl" type="TextureRect" parent="VBoxContainer2"]
 layout_mode = 2
-texture = ExtResource("4_a4twd")
+texture = SubResource("CompressedTexture2D_pqsst")
 
 [node name="MainMenuMusic" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
